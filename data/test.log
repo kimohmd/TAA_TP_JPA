@@ -1,0 +1,20 @@
+/*C1*/SET SCHEMA SYSTEM_LOBS
+INSERT INTO BLOCKS VALUES(0,2147483647,0)
+COMMIT
+/*C3*/SET SCHEMA PUBLIC
+create table Fiche (id bigint not null, date timestamp, etat varchar(255), libelle varchar(255), lieu varchar(255), note varchar(255), temps integer not null, url varchar(255), tableau_id integer, utilisateur_id bigint, primary key (id))
+create table Tableau (id integer not null, titre varchar(255), primary key (id))
+create table Utilisateur (id bigint not null, fonction varchar(255), nom varchar(255), prenom varchar(255), primary key (id))
+create sequence hibernate_sequence start with 1 increment by 1
+alter table Fiche add constraint FKo4cw80ehijpr33iwjqwntf2ri foreign key (tableau_id) references Tableau
+alter table Fiche add constraint FK4qdc5jonr42qu3t5qnvdrl5be foreign key (utilisateur_id) references Utilisateur
+INSERT INTO UTILISATEUR VALUES(1,'D\u00e9veloppeur ','HAMMAD','Abdel Karim')
+INSERT INTO FICHE VALUES(2,'2020-09-10 18:41:52.741000','REALISE','tester l''exemple de mise en place de persistence JPA','ISTIC','cette t\u00e2che est \u00e0 faire en premier..',30,'https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit',NULL,1)
+INSERT INTO FICHE VALUES(3,'2020-09-10 18:41:52.741000','EN_COURS','mettre en place la persistence de donn\u00e9es','ISTIC','cette t\u00e2che est \u00e0 faire avant la fin de la journ\u00e9e..',240,'https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit',NULL,1)
+INSERT INTO FICHE VALUES(4,'2020-09-10 18:41:52.741000','EN_ATTANTE','tester la connexion \u00e0 une base mysql','ISTIC','cette t\u00e2che est \u00e0 faire avant la fin..',60,'https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit',NULL,1)
+INSERT INTO TABLEAU VALUES(5,'kanban TP JPA TAA')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 6
+COMMIT
+DISCONNECT
+/*C2*/SET SCHEMA PUBLIC
+DISCONNECT
