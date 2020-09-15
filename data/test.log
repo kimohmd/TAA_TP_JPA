@@ -8,13 +8,47 @@ create table Utilisateur (id bigint not null, fonction varchar(255), nom varchar
 create sequence hibernate_sequence start with 1 increment by 1
 alter table Fiche add constraint FKo4cw80ehijpr33iwjqwntf2ri foreign key (tableau_id) references Tableau
 alter table Fiche add constraint FK4qdc5jonr42qu3t5qnvdrl5be foreign key (utilisateur_id) references Utilisateur
-INSERT INTO UTILISATEUR VALUES(1,'D\u00e9veloppeur ','HAMMAD','Abdel Karim')
-INSERT INTO FICHE VALUES(2,'2020-09-10 18:41:52.741000','REALISE','tester l''exemple de mise en place de persistence JPA','ISTIC','cette t\u00e2che est \u00e0 faire en premier..',30,'https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit',NULL,1)
-INSERT INTO FICHE VALUES(3,'2020-09-10 18:41:52.741000','EN_COURS','mettre en place la persistence de donn\u00e9es','ISTIC','cette t\u00e2che est \u00e0 faire avant la fin de la journ\u00e9e..',240,'https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit',NULL,1)
-INSERT INTO FICHE VALUES(4,'2020-09-10 18:41:52.741000','EN_ATTANTE','tester la connexion \u00e0 une base mysql','ISTIC','cette t\u00e2che est \u00e0 faire avant la fin..',60,'https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit',NULL,1)
-INSERT INTO TABLEAU VALUES(5,'kanban TP JPA TAA')
+INSERT INTO UTILISATEUR VALUES(1,'d\u00e9veloppeur','UTILISATEUR','utilisateur')
+INSERT INTO TABLEAU VALUES(2,'kanban TP JPA TAA')
+INSERT INTO FICHE VALUES(3,'2020-09-15 17:17:11.614000','REALISE','tester l''exemple de mise en place de persistence JPA','tester l''exemple de mise en place de persistence JPA','cette t\u00e2che est \u00e0 faire en premier..',30,'https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit',2,1)
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 4
+COMMIT
+DISCONNECT
+/*C4*/SET SCHEMA PUBLIC
+INSERT INTO UTILISATEUR VALUES(4,'DEV','HAMMAD','Abdel')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 5
+COMMIT
+DISCONNECT
+/*C5*/SET SCHEMA PUBLIC
+INSERT INTO UTILISATEUR VALUES(5,'designer','user','another')
 ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 6
 COMMIT
 DISCONNECT
+/*C6*/SET SCHEMA PUBLIC
+INSERT INTO UTILISATEUR VALUES(6,'designer','user','another')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 7
+COMMIT
 /*C2*/SET SCHEMA PUBLIC
+DELETE FROM UTILISATEUR WHERE ID=6
+COMMIT
+/*C6*/INSERT INTO UTILISATEUR VALUES(7,'designer','user','another')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 8
+COMMIT
+INSERT INTO UTILISATEUR VALUES(8,'designer','user','another')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 9
+COMMIT
+/*C2*/DELETE FROM UTILISATEUR WHERE ID=7
+COMMIT
+DELETE FROM UTILISATEUR WHERE ID=8
+COMMIT
+/*C6*/DISCONNECT
+/*C7*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C8*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C9*/SET SCHEMA PUBLIC
+INSERT INTO TABLEAU VALUES(9,'tp2')
+INSERT INTO UTILISATEUR VALUES(10,'dev','HAMMAD','karim')
+INSERT INTO FICHE VALUES(11,'2020-09-15 18:07:19.342000','EN_ATTANTE','servlet avec JPA','servlet avec JPA','a finir avant la prochaine seance',100,'http://localhost:8080/kanban.html',9,10)
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 12
+COMMIT

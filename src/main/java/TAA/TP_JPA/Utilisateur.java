@@ -15,6 +15,12 @@ public class Utilisateur {
 public Utilisateur() {
 		
 	}
+
+public Utilisateur(String nom, String prenom, String fonc) {
+	this.nom= nom;
+	this.prenom = prenom;
+	this.fonction = fonc;
+}
 	
 @Id
 @GeneratedValue

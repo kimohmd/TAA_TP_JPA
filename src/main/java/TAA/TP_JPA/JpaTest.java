@@ -43,77 +43,29 @@ import javax.persistence.PersistenceContext;
 
 public class JpaTest {
 
-	/**
-	 * @param args
-	 */
+    
+
+	
 	public static void main(String[] args) {
 
 		EntityManager manager = EntityManagerHelper.getEntityManager();
+        UtilisateurDAO userDao= new UtilisateurDAO(manager);
+        FicheDAO  ficheDao = new FicheDAO(manager);
+        TableauDAO tableauDao = new TableauDAO(manager);
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
-
 		
-		
-		Utilisateur u = new Utilisateur();
-		
-		Fiche fiche1 = new Fiche();
-		Fiche fiche2 = new Fiche();
-		Fiche fiche3 = new Fiche();
-		
-		Tableau tableau = new Tableau();
-		
-		
-
-		u.setNom("HAMMAD");
-		u.setPrenom("Abdel Karim");
-		u.setFonction("Développeur ");
-		
-		fiche1.setLibelle("tester l'exemple de mise en place de persistence JPA");
-		fiche1.setDate(new Date());
-		fiche1.setLieu("ISTIC");
-		fiche1.setTemps(30);
-		fiche1.setNote("cette tâche est à faire en premier..");
-		fiche1.setUrl("https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit");
-		fiche1.setEtat(Etat.REALISE);
-		fiche1.setUtilisateur(u);
-		
-		fiche2.setLibelle("mettre en place la persistence de données");
-		fiche2.setDate(new Date());
-		fiche2.setLieu("ISTIC");
-		fiche2.setTemps(240);
-		fiche2.setNote("cette tâche est à faire avant la fin de la journée..");
-		fiche2.setUrl("https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit");
-		fiche2.setEtat(Etat.EN_COURS);
-		fiche2.setUtilisateur(u);
-		
-		fiche3.setLibelle("tester la connexion à une base mysql");
-		fiche3.setDate(new Date());
-		fiche3.setLieu("ISTIC");
-		fiche3.setTemps(60);
-		fiche3.setNote("cette tâche est à faire avant la fin..");
-		fiche3.setUrl("https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit");
-		fiche3.setEtat(Etat.EN_ATTANTE);
-		fiche3.setUtilisateur(u);
-		
-		List<Fiche> fiches = new ArrayList<Fiche>();
-		fiches.add(fiche1);
-		fiches.add(fiche2);
-		fiches.add(fiche3);
-		
-		tableau.setTitre("kanban TP JPA TAA");
-		tableau.setFiches(fiches);
-		
-		manager.persist(u);
-		
-		
-		manager.persist(fiche1);
-		manager.persist(fiche2);
-		manager.persist(fiche3);
-		
-		manager.persist(tableau);
 		
 		try {
-
+			Utilisateur u = new Utilisateur("UTILISATEUR", "utilisateur", "développeur");
+			userDao.create(u);
+			Tableau tableau = new Tableau("kanban TP JPA TAA");
+			tableauDao.create(tableau);
+			ficheDao.create(new Fiche("tester l'exemple de mise en place de persistence JPA",
+					new Date(),u, 30, "ISTIC","https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit",
+					"cette tâche est à faire en premier..",
+					Etat.REALISE,tableau));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

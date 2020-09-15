@@ -39,9 +39,10 @@ public class Fiche {
 		
 	}
 	
-	public Fiche(Long id, String l, Date d, Utilisateur u, int t, String lieu, String url, String n, Etat e) {
-		this.id = id;
-		
+	
+	public Fiche(String l, Date d, Utilisateur u, int t, String lieu, String url, String n, Etat e, Tableau tab) {
+
+		this.tableau = tab;
 		this.libelle = l;
 		this.date = d;
 		this.utilisateur = u;

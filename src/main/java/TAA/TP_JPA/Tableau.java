@@ -17,6 +17,17 @@ public class Tableau {
 	public String titre;
 	public List<Fiche> fiches = new ArrayList<Fiche>();
 	
+
+	public Tableau() {
+		
+	}
+	
+	public Tableau(String t) {
+		this.titre = t;
+		
+	}
+	
+	
 	@Id
 	@GeneratedValue
 	public int getId() {
