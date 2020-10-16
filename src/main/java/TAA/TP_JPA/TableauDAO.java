@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 
 public class TableauDAO implements Dao<Tableau> {
 	private EntityManager entityManager;
     
-    public TableauDAO(EntityManager manager) {
-    	entityManager = manager;
+    public TableauDAO() {
+    	this.entityManager = EntityManagerHelper.getEntityManager();
     }
     
  
@@ -29,14 +31,36 @@ public class TableauDAO implements Dao<Tableau> {
     
     
     public void create(Tableau tableau) {
-            entityManager.persist(tableau);
-    	
+         
+    	   
+        EntityTransaction tx = entityManager.getTransaction();
+		tx.begin();
+		
+		
+		try {
+			entityManager.persist(tableau);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		tx.commit();
+        	
     }
     
     
     
     
     public void delete(Tableau tableau) {
-    	entityManager.remove(tableau);
+    	
+ 	   
+     EntityTransaction tx = entityManager.getTransaction();
+		tx.begin();
+		
+		
+		try {
+			entityManager.remove(tableau);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		tx.commit();
     }
 }

@@ -4,14 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 
 
 
 public class UtilisateurDAO implements Dao<Utilisateur> {
 	private EntityManager entityManager;
     
-    public UtilisateurDAO(EntityManager manager) {
-    	entityManager = manager;
+    public UtilisateurDAO() {
+    	this.entityManager = EntityManagerHelper.getEntityManager();
     }
     
  
@@ -32,13 +34,33 @@ public class UtilisateurDAO implements Dao<Utilisateur> {
     
     public void create(Utilisateur user) {
             entityManager.persist(user);
-    	
+            EntityTransaction tx = entityManager.getTransaction();
+    		tx.begin();
+    		
+    		
+    		try {
+    			entityManager.persist(user);
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+    		tx.commit();
     }
     
     
     
     
     public void delete(Utilisateur user) {
-    	entityManager.remove(user);
+    	
+    	  entityManager.persist(user);
+          EntityTransaction tx = entityManager.getTransaction();
+  		tx.begin();
+  		
+  		
+  		try {
+  			entityManager.remove(user);
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  		}
+  		tx.commit();
     }
 }

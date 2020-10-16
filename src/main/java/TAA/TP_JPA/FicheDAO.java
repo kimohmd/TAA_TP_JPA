@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
+
 
 public class FicheDAO implements Dao<Fiche> {
 	private EntityManager entityManager;
     
-    public FicheDAO(EntityManager manager) {
-    	entityManager = manager;
+    public FicheDAO() {
+    	this.entityManager = EntityManagerHelper.getEntityManager();
     }
     
  
@@ -29,14 +32,37 @@ public class FicheDAO implements Dao<Fiche> {
     
     
     public void create(Fiche fiche) {
+    	EntityTransaction tx = entityManager.getTransaction();
+		tx.begin();
+		
+		
+		try {
             entityManager.persist(fiche);
-    	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		tx.commit();
+
+
     }
     
     
     
     
     public void delete(Fiche fiche) {
-    	entityManager.remove(fiche);
+    	
+    	
+    	EntityTransaction tx = entityManager.getTransaction();
+		tx.begin();
+		
+		
+		try {
+			entityManager.remove(fiche);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		tx.commit();
+    	
+    	
     }
 }

@@ -48,33 +48,21 @@ public class JpaTest {
 	
 	public static void main(String[] args) {
 
-		EntityManager manager = EntityManagerHelper.getEntityManager();
-        UtilisateurDAO userDao= new UtilisateurDAO(manager);
-        FicheDAO  ficheDao = new FicheDAO(manager);
-        TableauDAO tableauDao = new TableauDAO(manager);
-		EntityTransaction tx = manager.getTransaction();
-		tx.begin();
 		
+        UtilisateurDAO userDao= new UtilisateurDAO();
+        FicheDAO  ficheDao = new FicheDAO();
+        TableauDAO tableauDao = new TableauDAO();
 		
-		try {
-			Utilisateur u = new Utilisateur("UTILISATEUR", "utilisateur", "développeur");
+			Utilisateur u = new Utilisateur("HA", "Abdel", "dev");
 			userDao.create(u);
-			Tableau tableau = new Tableau("kanban TP JPA TAA");
+			Tableau tableau = new Tableau("kanban TP2");
 			tableauDao.create(tableau);
-			ficheDao.create(new Fiche("tester l'exemple de mise en place de persistence JPA",
+			ficheDao.create(new Fiche("mettre en place des servlets",
 					new Date(),u, 30, "ISTIC","https://docs.google.com/document/d/1XksDBYnQmaqVoNPZ3ZfGVpEPxlP9ATsBQRW1h48j_go/edit",
-					"cette tâche est à faire en premier..",
+					"cette tâche est à faire en dernier..",
 					Etat.REALISE,tableau));
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		tx.commit();
-
-
-		manager.close();
-		EntityManagerHelper.closeEntityManagerFactory();
-		//		factory.close();
+		
 	}
 
 }

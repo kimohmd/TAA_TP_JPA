@@ -32,10 +32,10 @@ public class MybddServlet extends HttpServlet {
 	
 	public void init(ServletConfig config) throws ServletException { 
 		super.init(config); 
-		manager = EntityManagerHelper.getEntityManager();
-        userDao= new UtilisateurDAO(manager);
-        ficheDao = new FicheDAO(manager);
-        tableauDao = new TableauDAO(manager);
+		
+        userDao= new UtilisateurDAO();
+        ficheDao = new FicheDAO();
+        tableauDao = new TableauDAO();
 		} 
 	
     @Override
@@ -127,8 +127,6 @@ public class MybddServlet extends HttpServlet {
 		response.setContentType("text/html");
 		
 
-		EntityTransaction tx = manager.getTransaction();
-		tx.begin();
 		Tableau t = new Tableau(request.getParameter("titre"));
 		tableauDao.create(t);
 		
@@ -148,7 +146,6 @@ public class MybddServlet extends HttpServlet {
 				t));
 		
 		
-		tx.commit();
 		doGet(request, response);
 			}
 			
